@@ -2,7 +2,7 @@ package application;
 	
 
 
-import java.awt.Font;
+import javafx.scene.text.Font;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,13 +19,14 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox; 
+import javafx.scene.layout.VBox;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text; 
 import javafx.stage.Stage; 
 import javafx.collections.ObservableList; 
 import javafx.scene.input.MouseEvent; 
 import javafx.event.EventHandler;
-import javafx.scene.paint.Color; 
+import javafx.scene.paint.Color;
 
 
 public class Main extends Application {
@@ -36,8 +37,7 @@ public class Main extends Application {
 		Button addbutton= new Button("ADD");
 		Button editbutton=new Button("EDIT");
 		Button deletebutton=new Button("DELETE");
-		
-	
+		text1.setStyle(" -fx-base: white;");
 		addbutton.setOnMouseClicked((new EventHandler<MouseEvent>() { 
 	         public void handle(MouseEvent event) { 
 	        	 addbutton.setStyle("-fx-font: 22 arial; -fx-base: #F0E8B8;");
@@ -101,6 +101,18 @@ public class Main extends Application {
 	                gridPane.add(t7, 1, 6);
 	                gridPane.add(t8, 1, 7);
 	                
+	                
+	                backStage.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+		                public void handle(MouseEvent e) {
+		                	backStage.setEffect(shadow);
+		                  }
+	                 });
+	                backStage.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+		                public void handle(MouseEvent e) {
+		                	backStage.setEffect(null);
+		                  }
+	                 });
+	                
 	                createcustomer.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
 		                public void handle(MouseEvent e) {
 		                	createcustomer.setEffect(shadow);
@@ -162,7 +174,14 @@ public class Main extends Application {
 		
 		
 		
-	    VBox vBox = new VBox();   
+	    VBox vBox = new VBox(); 
+	    vBox.setStyle("-fx-font: 22 arial; -fx-base: #787878;");
+	    text1.setTextFill(Color.WHITE);
+	    text1.setFont(new Font("Italic", 40));
+	    addbutton.setStyle("-fx-base: white;");
+	    editbutton.setStyle("-fx-base: white;");
+	    deletebutton.setStyle("-fx-base: white;");
+
 	    vBox.setSpacing(30);   
 	    vBox.setMargin(text1, new Insets(20, 20, 20, 20));  
 	    vBox.setMargin(addbutton, new Insets(20, 20, 20, 20)); 
@@ -171,7 +190,7 @@ public class Main extends Application {
 	    ObservableList list = vBox.getChildren(); 
 	    list.addAll(text1,addbutton,editbutton,deletebutton);
 	    vBox.setAlignment(Pos.CENTER);
-	    Scene scene = new Scene(vBox);
+	    Scene scene = new Scene(vBox,600,600);
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
 	}
